@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import './App.css';
-
+//img
+import logo from '../../assets/img/Opflix.png';
+import img from '../../assets/img/filmes2019.jpg';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="body">
+      <div>
+        <nav>
+          <img src={logo}></img>
+        </nav>
+
+        <main>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+        <img src={img}></img>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+        <button name="botao">Cadastre-se</button>
+        </main>
+      </div>
     </div>
   );
 }
