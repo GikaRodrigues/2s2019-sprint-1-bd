@@ -13,7 +13,6 @@ namespace Senai.OpFlix.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    [Authorize(Roles = "Administrador")]
     [ApiController]
     public class UsuariosController : ControllerBase
     {
@@ -24,31 +23,9 @@ namespace Senai.OpFlix.WebApi.Controllers
             UsuarioRepository = new UsuarioRepository();
         }
 
-        [HttpGet]
-        public IActionResult Listar()
-        {
-            return Ok(UsuarioRepository.Listar());
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult BuscarPorId(int id)
-        {
-            try
-            {
-                Usuarios Usuario = UsuarioRepository.BuscarPorId(id);
-                if (Usuario == null)
-                    return NotFound();
-
-                return Ok(Usuario);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Cadastrar(Usuarios usuario)
+        [Authorize(Roles = "ADMINISTRADOR")]
+        [HttpPost("CadastrarAdmin")]
+        public IActionResult CadastrarAdmin(Usuarios usuario)
         {
             try
             {
@@ -57,34 +34,14 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
+                return BadRequest(new { mensagem = "Ocorreu algum erro :(" + ex.Message });
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(Usuarios usuario, int id)
+        [HttpPost]
+        public IActionResult Cadastrar(Usuarios usuario)
         {
-            try
-            {
-                usuario.IdUsuarios = id;
-                if (usuario == null)
-
-                    return NotFound();
-
-                UsuarioRepository.Atualizar(usuario);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Deu erro ai" + ex.Message });
-            }
-
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
-        {
-            UsuarioRepository.Deletar(id);
+            UsuarioRepository.Cadastrar(usuario);
             return Ok();
         }
     }

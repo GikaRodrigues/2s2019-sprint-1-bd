@@ -14,41 +14,26 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
+
     public class LancamentosController : ControllerBase
     {
         private ILancamentoRepository LancamentoRepository { get; set; }
 
         public LancamentosController()
         {
-            LancamentoRepository = new LancamentoRepository();
+                LancamentoRepository = new LancamentoRepository();
         }
 
         [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
-            return Ok(LancamentoRepository.Listar());
-        }
-
-        [Authorize(Roles = "Administrador")]
-        [HttpGet("{id}")]
-        public IActionResult BuscarPorId(int id)
-        {
-            try
             {
-                Lancamentos Lancamento = LancamentoRepository.BuscarPorId(id);
-                if (Lancamento == null)
-                    return NotFound();
-
-                return Ok(Lancamento);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
+                return Ok(LancamentoRepository.Listar());
             }
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
         public IActionResult Cadastrar(Lancamentos lancamento)
         {
@@ -59,37 +44,35 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { mensagem= "Algo de errado não está certo" + ex.Message });
+                return BadRequest(new { mensagem = "Ocorreu algum erro :(" + ex.Message });
             }
         }
 
-        [Authorize(Roles = "Administrador")]
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(Lancamentos lancamento, int id)
+        [Authorize(Roles = "ADMINISTRADOR")]
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
         {
-            try
-            {
-                lancamento.IdLancamento = id;
-                if (lancamento == null)
-
-                    return NotFound();
-
-                LancamentoRepository.Atualizar(lancamento);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Deu erro ai" + ex.Message });
-            }
-
+            Lancamentos Lancamento = LancamentoRepository.BuscarPorId(id);
+            if (Lancamento == null)
+                return NotFound();
+            return Ok(Lancamento);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
+        [HttpPut("{id}")]
+        public IActionResult Atualizar(Lancamentos Lancamento, int id)
+        {
+            Lancamento.IdLancamento = id;
+            LancamentoRepository.Atualizar(Lancamento);
+            return Ok();
+        }
+
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
             LancamentoRepository.Deletar(id);
-            return Ok();
+            return Ok();    
         }
     }
 }

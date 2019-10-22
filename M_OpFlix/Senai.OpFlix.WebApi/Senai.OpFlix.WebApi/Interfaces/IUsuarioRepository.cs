@@ -8,14 +8,8 @@ namespace Senai.OpFlix.WebApi.Interfaces
 {
     interface IUsuarioRepository
     {
-        List<Usuarios> Listar();
+        void CadastrarAdmin(Usuarios usuarios);
 
-        Usuarios BuscarPorId (int id);
-
-        void Cadastrar (Usuarios usuario);
-
-        void Atualizar (Usuarios usuario);
-
-        void Deletar(int id);
+        void Cadastrar(Usuarios usuarios);
     }
 }

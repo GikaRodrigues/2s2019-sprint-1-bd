@@ -21,7 +21,7 @@ namespace Senai.OpFlix.WebApi.Controllers
         UsuarioRepository UsuarioRepository = new UsuarioRepository();
 
         [HttpPost]
-        public IActionResult Login (LoginViewModel login)
+        public IActionResult Login(LoginViewModel login)
         {
             try
             {
@@ -31,10 +31,13 @@ namespace Senai.OpFlix.WebApi.Controllers
 
                 var claims = new[]
                 {
+                    // email
                     new Claim(JwtRegisteredClaimNames.Email, Usuario.Email),
                     new Claim("chave", "valor"),
-                    new Claim(JwtRegisteredClaimNames.Jti, Usuario.IdUsuarios.ToString()),
-                    new Claim(ClaimTypes.Role, Usuario.Permissao)
+                    // id
+                    new Claim(JwtRegisteredClaimNames.Jti, Usuario.IdUsuario.ToString()),
+                    // é a permissão do usuário
+                    new Claim(ClaimTypes.Role, Usuario.Permissao),
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("opflix-chave-autenticacao"));
@@ -45,7 +48,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                     issuer: "OpFlix.WebApi",
                     audience: "OpFlix.WebApi",
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(120),
+                    expires: DateTime.Now.AddHours(1),
                     signingCredentials: creds);
 
                 return Ok(new
@@ -56,7 +59,7 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { mensagem = "Erro Mano." + ex.Message });
+                return BadRequest(new { mensagem = "Algo deu errado :( " + ex.Message });
             }
         }
     }

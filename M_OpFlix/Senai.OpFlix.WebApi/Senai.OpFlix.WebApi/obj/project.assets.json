@@ -12703,8 +12703,7 @@
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.9",
       "Swashbuckle.AspNetCore >= 4.0.1",
-      "Swashbuckle.AspNetCore.Swagger >= 4.0.1",
-      "Swashbuckle.AspNetCore.SwaggerGen >= 4.0.1"
+      "Swashbuckle.AspNetCore.Swagger >= 4.0.1"
     ]
   },
   "packageFolders": {
@@ -12714,11 +12713,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\M_OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi.csproj",
       "projectName": "Senai.OpFlix.WebApi",
-      "projectPath": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi.csproj",
+      "projectPath": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\M_OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi.csproj",
       "packagesPath": "C:\\Users\\38850490828\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\38850490828\\Documents\\2s2019-sprint-1-bd\\M_OpFlix\\Senai.OpFlix.WebApi\\Senai.OpFlix.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12787,10 +12786,6 @@
             "version": "[4.0.1, )"
           },
           "Swashbuckle.AspNetCore.Swagger": {
-            "target": "Package",
-            "version": "[4.0.1, )"
-          },
-          "Swashbuckle.AspNetCore.SwaggerGen": {
             "target": "Package",
             "version": "[4.0.1, )"
           }

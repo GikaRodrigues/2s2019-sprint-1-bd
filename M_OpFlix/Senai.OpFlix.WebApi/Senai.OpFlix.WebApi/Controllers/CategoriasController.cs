@@ -13,8 +13,10 @@ namespace Senai.OpFlix.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "ADMINISTRADOR")]
     [ApiController]
+
+
     public class CategoriasController : ControllerBase
     {
         private ICategoriaRepository CategoriaRepository { get; set; }
@@ -27,23 +29,8 @@ namespace Senai.OpFlix.WebApi.Controllers
         [HttpGet]
         public IActionResult Listar()
         {
-            return Ok(CategoriaRepository.Listar());
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult BuscarPorId(int id)
-        {
-            try
             {
-                Categorias Categoria = CategoriaRepository.BuscarPorId(id);
-                if (Categoria == null)
-                    return NotFound();
-
-                return Ok(Categoria);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
+                return Ok(CategoriaRepository.Listar());
             }
         }
 
@@ -57,28 +44,27 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
+                return BadRequest(new { mensagem = "Ocorreu algum erro :(" + ex.Message });
             }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
+        {
+            Categorias Categoria = CategoriaRepository.BuscarPorId(id);
+            if (Categoria == null)
+                return NotFound();
+            return Ok(Categoria);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Atualizar(Categorias categoria, int id)
+        public IActionResult Atualizar(Categorias Categoria, int id)
         {
-            try
-            {
-                categoria.IdCategoria = id;
-                if (categoria == null)
-
-                    return NotFound();
-
-                CategoriaRepository.Atualizar(categoria);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Algo de errado não está certo" + ex.Message });
-            }
-
+            Categoria.IdCategoria = id;
+            CategoriaRepository.Atualizar(Categoria);
+            return Ok();
+            
         }
     }
+
 }
